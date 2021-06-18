@@ -1,32 +1,35 @@
-const { join } = require('path');
-
+const { resolve, join } = require('path');
 const autoPrefixer = require('autoprefixer');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
 
+const rootDir = resolve(__dirname, '..');
+
 const configuration = {
   cache: true,
-  devServer: {
-    compress: false,
-    contentBase: join(__dirname, 'dist'),
-    historyApiFallback: true,
-    hot: true,
-    inline: true,
-    overlay: true,
-    writeToDisk: false,
-  },
-  devtool: 'cheap-module-eval-source-map',
   entry: {
-    app: './src/index.ts',
+    app: join(rootDir, '/src/index.ts'),
   },
-  mode: 'development',
   module: {
     rules: [
       {
         loader: 'html-loader',
         options: {
-          attrs: ['img:src', 'link:href'],
+          sources: {
+            list: [
+              {
+                tag: 'img',
+                attribute: 'src',
+                type: 'src',
+              },
+              {
+                tag: 'link',
+                attribute: 'href',
+                type: 'src',
+              },
+            ],
+          },
         },
         test: /\.html$/u,
       },
@@ -73,12 +76,11 @@ const configuration = {
     ],
   },
   output: {
-    filename: 'chunks/[name].js',
+    filename: 'chunks/[chunkhash].js',
     pathinfo: true,
     publicPath: '/',
-  },
-  performance: {
-    hints: false,
+    path: join(rootDir, '/dist'),
+    clean: true,
   },
   plugins: [
     new CleanWebpackPlugin({
@@ -86,23 +88,34 @@ const configuration = {
       dry: false,
       protectWebpackAssets: true,
       verbose: false,
+      cleanOnceBeforeBuildPatterns: [join(rootDir, '/dist/**/*')],
     }),
     new HtmlWebpackPlugin({
+      hash: true,
       inject: true,
-      minify: false,
-      template: 'src/index.html',
+      template: join(rootDir, 'src/index.html'),
+      title: 'Project Template',
+      minify: {
+        collapseWhitespace: true,
+        removeComments: true,
+        removeRedundantAttributes: true,
+        removeScriptTypeAttributes: true,
+        removeStyleLinkTypeAttributes: true,
+        useShortDoctype: true,
+      },
     }),
     new webpack.DefinePlugin({
-      'process.env.NODE_ENV': JSON.stringify('development'),
+      'process.env.NODE_ENV': JSON.stringify(
+        process.env.NODE_ENV || 'development',
+      ),
     }),
   ],
   resolve: {
     extensions: ['.js', '.ts'],
     mainFields: ['browser', 'module', 'main'],
-  },
-  watch: true,
-  watchOptions: {
-    ignored: /node_modules/u,
+    alias: {
+      _components: join(rootDir, 'src/components/'),
+    },
   },
 };
 

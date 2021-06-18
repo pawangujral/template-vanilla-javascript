@@ -22,7 +22,11 @@
     "incremental": true,
     "resolveJsonModule": true,
     "sourceMap": true,
-    "tsBuildInfoFile": "./.cache/typescript"
+    "tsBuildInfoFile": "./.cache/typescript",
+    "baseUrl": "/",
+    "paths": {
+      "_components/*": ["src/components/*"]
+    }
   },
   "files": ["./src/index.ts"],
   "include": ["./**/*"]
