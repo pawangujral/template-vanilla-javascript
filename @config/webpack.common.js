@@ -2,6 +2,7 @@ const { resolve, join } = require('path');
 const autoPrefixer = require('autoprefixer');
 const { CleanWebpackPlugin } = require('clean-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const webpack = require('webpack');
 
 const rootDir = resolve(__dirname, '..');
@@ -76,7 +77,7 @@ const configuration = {
     ],
   },
   output: {
-    filename: 'chunks/[chunkhash].js',
+    filename: 'chunks/[name].js',
     pathinfo: true,
     publicPath: '/',
     path: join(rootDir, '/dist'),
@@ -111,11 +112,8 @@ const configuration = {
     }),
   ],
   resolve: {
-    extensions: ['.js', '.ts'],
-    mainFields: ['browser', 'module', 'main'],
-    alias: {
-      _components: join(rootDir, 'src/components/'),
-    },
+    plugins: [new TsconfigPathsPlugin()],
+    extensions: ['.ts', '.js'],
   },
 };
 

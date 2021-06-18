@@ -9,7 +9,7 @@ module.exports = merge(common, {
   devServer: {
     compress: false,
     contentBase: join(rootDir, 'dist'),
-    port: 9000,
+    port: 8080,
     historyApiFallback: true,
     hot: true,
     inline: true,

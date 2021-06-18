@@ -23,11 +23,15 @@
     "resolveJsonModule": true,
     "sourceMap": true,
     "tsBuildInfoFile": "./.cache/typescript",
-    "baseUrl": "/",
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "removeComments": true,
+    "baseUrl": "src",
     "paths": {
-      "_components/*": ["src/components/*"]
+      "_/*": ["*"]
     }
   },
   "files": ["./src/index.ts"],
-  "include": ["./**/*"]
+  "include": ["./**/*"],
+  "exclude": ["node_modules"]
 }
