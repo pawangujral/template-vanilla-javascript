@@ -1,7 +1,7 @@
 # Webpack Boilerplate
 
 Simply clone this project and get started. You can replace this readme with your
-own when you are finished.
+own.
 
 ## Available scripts
 
