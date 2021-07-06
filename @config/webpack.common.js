@@ -5,12 +5,12 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 const TsconfigPathsPlugin = require('tsconfig-paths-webpack-plugin');
 const webpack = require('webpack');
 
-const rootDir = resolve(__dirname, '..');
+const rootDirectory = resolve(__dirname, '..');
 
 const configuration = {
   cache: true,
   entry: {
-    app: join(rootDir, '/src/index.ts'),
+    app: join(rootDirectory, '/src/index.ts'),
   },
   module: {
     rules: [
@@ -56,7 +56,6 @@ const configuration = {
           {
             loader: 'postcss-loader',
             options: {
-              plugins: () => [autoPrefixer()],
               sourceMap: true,
             },
           },
@@ -77,25 +76,23 @@ const configuration = {
     ],
   },
   output: {
+    clean: true,
     filename: 'chunks/[name].js',
+    path: join(rootDirectory, '/dist'),
     pathinfo: true,
     publicPath: '/',
-    path: join(rootDir, '/dist'),
-    clean: true,
   },
   plugins: [
     new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: [join(rootDirectory, '/dist/**/*')],
       cleanStaleWebpackAssets: true,
       dry: false,
       protectWebpackAssets: true,
       verbose: false,
-      cleanOnceBeforeBuildPatterns: [join(rootDir, '/dist/**/*')],
     }),
     new HtmlWebpackPlugin({
       hash: true,
       inject: true,
-      template: join(rootDir, 'src/index.html'),
-      title: 'Project Template',
       minify: {
         collapseWhitespace: true,
         removeComments: true,
@@ -104,16 +101,18 @@ const configuration = {
         removeStyleLinkTypeAttributes: true,
         useShortDoctype: true,
       },
+      template: join(rootDirectory, 'src/index.html'),
+      title: 'Project Template',
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify(
-        process.env.NODE_ENV || 'development',
+        process.env.NODE_ENV ?? 'development',
       ),
     }),
   ],
   resolve: {
-    plugins: [new TsconfigPathsPlugin()],
     extensions: ['.ts', '.js'],
+    plugins: [new TsconfigPathsPlugin()],
   },
 };
 

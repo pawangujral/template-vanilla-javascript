@@ -75,9 +75,12 @@
     "lint:fix": "run-p lint:*:fix",
     "lint:ts": "eslint --resolve-plugins-relative-to \"./node_modules/@ridedott/eslint-config\" \"**/*.ts\"",
     "lint:ts:fix": "eslint --fix --resolve-plugins-relative-to \"./node_modules/@ridedott/eslint-config\" \"**/*.ts\"",
-    "start": "webpack serve --config @config/webpack.dev.js --progress",
-    "build": "webpack --mode production --config @config/webpack.prod.js",
+    "start": "webpack serve --config @config/webpack.development.js --progress",
+    "build": "webpack --mode production --config @config/webpack.production.js",
     "test": "jest",
     "types": "tsc --noEmit"
+  },
+  "dependencies": {
+    "postcss": "^8.3.5"
   }
 }
