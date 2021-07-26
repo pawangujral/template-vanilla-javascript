@@ -81,6 +81,6 @@
     "types": "tsc --noEmit"
   },
   "dependencies": {
-    "postcss": "^8.3.5"
+    "postcss": "^8.3.6"
   }
 }
