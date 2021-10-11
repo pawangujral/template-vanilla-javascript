@@ -2,7 +2,7 @@ env:
   browser: true
   es6: true
   node: true
-extends: '@ridedott/eslint-config'
+extends: ['airbnb', 'airbnb/hooks', 'airbnb-typescript']
 overrides:
   - files: ./src/**/*spec.ts
     rules:

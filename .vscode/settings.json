@@ -14,9 +14,6 @@
   },
   "eslint.enable": true,
   "eslint.lintTask.enable": true,
-  "eslint.options": {
-    "resolvePluginsRelativeTo": "./node_modules/@ridedott/eslint-config"
-  },
   "eslint.run": "onType",
   "files.associations": {
     "*.css": "postcss"

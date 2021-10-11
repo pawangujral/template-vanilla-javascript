@@ -10,7 +10,6 @@
   "description": "Webpack template for quick vanilla project",
   "version": "1.0.0",
   "devDependencies": {
-    "@ridedott/eslint-config": "^1.1.44",
     "@types/jest": "^26.0.23",
     "@types/webpack-env": "^1.16.2",
     "autoprefixer": "^10.2.6",
@@ -58,7 +57,7 @@
       "stylelint --fix"
     ],
     "*.ts": [
-      "eslint --fix --resolve-plugins-relative-to \"./node_modules/@ridedott/eslint-config\""
+      "eslint --fix --resolve-plugins-relative-to"
     ],
     "*.{css,js,json,md,ts,yaml,yml}": [
       "prettier --write"
@@ -73,14 +72,15 @@
     "lint:css": "stylelint 'src/**/*.css'",
     "lint:css:fix": "stylelint --fix 'src/**/*.css'",
     "lint:fix": "run-p lint:*:fix",
-    "lint:ts": "eslint --resolve-plugins-relative-to \"./node_modules/@ridedott/eslint-config\" \"**/*.ts\"",
-    "lint:ts:fix": "eslint --fix --resolve-plugins-relative-to \"./node_modules/@ridedott/eslint-config\" \"**/*.ts\"",
+    "lint:ts": "eslint --resolve-plugins-relative-to \"**/*.ts\"",
+    "lint:ts:fix": "eslint --fix --resolve-plugins-relative-to  \"**/*.ts\"",
     "start": "webpack serve --config @config/webpack.development.js --progress",
     "build": "webpack --mode production --config @config/webpack.production.js",
     "test": "jest",
     "types": "tsc --noEmit"
   },
   "dependencies": {
+    "eslint-config-airbnb": "^18.2.1",
     "postcss": "^8.3.5"
   }
 }
