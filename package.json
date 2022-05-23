@@ -81,6 +81,6 @@
   },
   "dependencies": {
     "eslint-config-airbnb": "^18.2.1",
-    "postcss": "^8.3.5"
+    "postcss": "^8.4.14"
   }
 }
